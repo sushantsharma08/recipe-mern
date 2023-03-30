@@ -1,4 +1,7 @@
 import React, { useState } from 'react'
+import axios from "axios";
+import { useCookies } from "react-cookie"
+import {useNavigate} from "react-router-dom"
 
 const Authentication = () => {
   return (
@@ -10,16 +13,33 @@ const Authentication = () => {
 }
 
 const Login = () => {
-  const [Username, setUsername] = useState("")
-  const [Password, setPassword] = useState("")
+  const [username, setusername] = useState("")
+  const [password, setpassword] = useState("")
+  const [,setCookies] = useCookies(["access_token"])
+  const navigate =  useNavigate();
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:3001/auth/login", { username, password });
 
+      setCookies("access_token",response.data.token);
+      window.localStorage.setItem("UserID",response.data.userID);
+
+      navigate("/");
+      console.log(response);
+      alert('Loged In Successfully')
+    } catch (err) {
+      console.error(err)
+    }
+  }
   return (
     <Form
-      Username={Username}
-      setUsername={setUsername}
-      Password={Password}
-      setPassword={setPassword}
+      username={username}
+      setusername={setusername}
+      password={password}
+      setpassword={setpassword}
       Label="Login"
+      onSubmit={onSubmit}
     />
   )
 }
@@ -27,16 +47,26 @@ const Login = () => {
 
 const Register = () => {
 
-  const [Username, setUsername] = useState("")
-  const [Password, setPassword] = useState("")
+  const [username, setusername] = useState("")
+  const [password, setpassword] = useState("")
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      await axios.post("http://localhost:3001/auth/register", { username, password });
+      alert("Registeration Done! Now Login.")
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <Form
-      Username={Username}
-      setUsername={setUsername}
-      Password={Password}
-      setPassword={setPassword}
+      username={username}
+      setusername={setusername}
+      password={password}
+      setpassword={setpassword}
       Label="Register"
+      onSubmit={onSubmit}
     />
   )
 }
@@ -45,24 +75,24 @@ const Form = (props) => {
 
   return (
     <div className='auth-container'>
-      <form>
+      <form onSubmit={props.onSubmit}>
         <h2>{props.Label}</h2>
         <div className='form-group'>
-          <label htmlFor='username'>UserName: </label>
+          <label htmlFor='username'>username: </label>
           <input
             type="text"
             id="username"
-            onChange={(e) => { props.setUsername(e.target.value) }}
-            value={props.Username}
+            onChange={(e) => { props.setusername(e.target.value) }}
+            value={props.username}
           />
         </div>
         <div className='form-group'>
-          <label htmlFor='password'>Password: </label>
+          <label htmlFor='password'>password: </label>
           <input
-            type="text"
+            type="password"
             id="password"
-            onChange={(e) => { props.setPassword(e.target.value) }}
-            value={props.Password}
+            onChange={(e) => { props.setpassword(e.target.value) }}
+            value={props.password}
           />
         </div>
 
