@@ -10,9 +10,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.get('/', (req, res) => {
-    res.send('Hey this is my API running 🥳')
-  })
+
 app.use("/auth",UserRouter)
 app.use("/recipes",recipesRouter)
 
