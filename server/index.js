@@ -2,8 +2,8 @@ import express from "express";
 import cors from 'cors';
 import mongoose from 'mongoose';
 // import { UserModel } from "./models/Users";
-import {UserRouter} from './routes/users.js'
-import {recipesRouter} from './routes/recipes.js'
+import {UserRouter} from './src/routes/users.js'
+import {recipesRouter} from './src/routes/recipes.js'
 
 const app = express();
 
