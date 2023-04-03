@@ -20,13 +20,18 @@ const Login = () => {
   const onSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post("https://recipe-mern-nine.vercel.app/auth/login", { username, password });
-
+      const response = await axios.post("http://localhost:3001/auth/login", { username, password });
       setCookies("access_token",response.data.token);
-      window.localStorage.setItem("UserID",response.data.userID);
+      console.log(response);
+      console.log(response.data.token);
 
-      navigate("/");
-      alert('Loged In Successfully')
+      if(response.data.token){   
+        window.localStorage.setItem("UserID",response.data.userID);
+        navigate("/");
+        alert('Loged In Successfully')
+      }else{
+        alert("Error logging in !!!")
+      }
     } catch (err) {
       console.error(err)
     }
@@ -51,7 +56,7 @@ const Register = () => {
   const onSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post("https://recipe-mern-nine.vercel.app/auth/register", { username, password });
+      await axios.post("http://localhost:3001/auth/register", { username, password });
       alert("Registeration Done! Now Login.")
     } catch (err) {
       console.error(err);
