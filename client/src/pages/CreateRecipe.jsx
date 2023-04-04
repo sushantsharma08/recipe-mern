@@ -40,7 +40,7 @@ const CreateRecipe = () => {
   const onSubmit= async (event)=>{
     event.preventDefault();
     try {
-      await axios.post("http://localhost:3001/recipes",recipe);
+      await axios.post("https://recipe-mern-nine.vercel.app/recipes",recipe);
       navigate("/")
       alert("recipe saved")
     } catch (error) {
