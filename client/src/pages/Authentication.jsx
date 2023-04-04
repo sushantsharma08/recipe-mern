@@ -20,7 +20,7 @@ const Login = () => {
   const onSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3001/auth/login", { username, password });
+      const response = await axios.post("https://recipe-mern-nine.vercel.app/auth/login", { username, password });
       setCookies("access_token",response.data.token);
       console.log(response);
       console.log(response.data.token);
@@ -56,7 +56,7 @@ const Register = () => {
   const onSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post("http://localhost:3001/auth/register", { username, password });
+      await axios.post("https://recipe-mern-nine.vercel.app/auth/register", { username, password });
       alert("Registeration Done! Now Login.")
     } catch (err) {
       console.error(err);
