@@ -41,7 +41,7 @@ const CreateRecipe = () => {
     event.preventDefault();
     try {
       await axios.post("https://recipe-mern-nine.vercel.app/recipes",recipe);
-      navigate("/")
+      navigate("/");
       alert("recipe saved")
     } catch (error) {
       console.error(error);

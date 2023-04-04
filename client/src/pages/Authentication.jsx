@@ -107,6 +107,4 @@ const Form = (props) => {
 
 }
 
-
-
 export default Authentication
