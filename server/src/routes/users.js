@@ -32,7 +32,8 @@ router.post("/login",async(req,res)=>{
         return res.json({message:"User Doesn't Exist!"})
     }
 
-    const isPasswordValid = await bcrypt.compare(password,user.password);
+    // const isPasswordValid = await bcrypt.compare(password,user.password);
+    const isPasswordValid = await password;
 
     if(!isPasswordValid){
         return res.json({message:"User Password not valid!!!"})
