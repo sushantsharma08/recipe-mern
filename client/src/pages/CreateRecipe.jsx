@@ -1,6 +1,8 @@
 import React,{useState} from 'react'
 import axios from "axios";
 import { useGetUserId } from '../hooks/useGetUserId';
+import {useNavigate} from "react-router-dom"
+
 
 const CreateRecipe = () => {
 
@@ -14,6 +16,8 @@ const CreateRecipe = () => {
     cookingTime:0,
     userOwner:userID
   });
+  const navigate =  useNavigate();
+
 
   const handleChange = (event)=>{
     const {name,value}= event.target;
@@ -37,6 +41,7 @@ const CreateRecipe = () => {
     event.preventDefault();
     try {
       await axios.post("http://localhost:3001/recipes",recipe);
+      navigate("/")
       alert("recipe saved")
     } catch (error) {
       console.error(error);

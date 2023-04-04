@@ -1,6 +1,6 @@
 import express from "express";
 import jwt from 'jsonwebtoken'
-import bcrypt from 'bcrypt'
+// import bcrypt from 'bcrypt'
 import { UserModel } from "../models/Users.js";
 
 const router = express.Router();
@@ -13,8 +13,9 @@ router.post("/register",async(req,res)=>{
         return res.json({"message":"user already exists"});
     }
     
-    const hashedPassword = await bcrypt.hash(password,10);
-
+    // const hashedPassword = await bcrypt.hash(password,10);
+    const hashedPassword = await password;
+    
     const newUser = new UserModel({username,password: hashedPassword});
 
     await newUser.save();
