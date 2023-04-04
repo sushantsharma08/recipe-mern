@@ -4,6 +4,7 @@ import { useGetUserId } from '../hooks/useGetUserId';
 
 const Home = () => {
   const [recipes, setrecipes] = useState([]);
+  const [savedRecipes, setSavedRecipes] = useState([])
   const userId =useGetUserId();
 
   useEffect(() => {
@@ -16,7 +17,18 @@ const Home = () => {
         console.error(error);
       }
     }
+    const fetchSavedRecipe = async()=>{
+      try {
+      const response =  await axios.get(`https://recipe-mern-nine.vercel.app/recipes/savedRecipes/ids/${userId}`);
+      console.log(response.data);
+      // setSavedRecipes(response.data);
+      console.log(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
     fetchRecipe();
+    fetchSavedRecipe()
   },[])
   const saveRecipe = async (recipeId)=>{
     try{
