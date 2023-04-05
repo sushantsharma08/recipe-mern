@@ -20,8 +20,7 @@ const Home = () => {
     const fetchSavedRecipe = async()=>{
       try {
       const response =  await axios.get(`https://recipe-mern-nine.vercel.app/recipes/savedRecipes/ids/${userId}`);
-      console.log(response.data);
-      // setSavedRecipes(response.data);
+      setSavedRecipes(response.data.savedRecipes);
       console.log(response.data);
       } catch (error) {
         console.error(error);
@@ -30,14 +29,18 @@ const Home = () => {
     fetchRecipe();
     fetchSavedRecipe()
   },[])
+
   const saveRecipe = async (recipeId)=>{
     try{
     const response =  await axios.put("https://recipe-mern-nine.vercel.app/recipes",{recipeId,userId});
+    setSavedRecipes(response.data.savedRecipes)
     console.log(response);
     } catch (error) {
       console.error(error);
     }
   }
+
+  const isRecipeSaved=(id)=>savedRecipes.includes(id)
   
   return (
     <div>
@@ -45,9 +48,10 @@ const Home = () => {
       <ul>
         {recipes.map((recipe)=>
           <li key={recipe._id}> 
+          {savedRecipes.includes(recipe._id)&&<h1>Already saved!</h1>}
             <div>
               <h2>{recipe.name}</h2>
-              <button onClick={()=>{saveRecipe(recipe._id)}}>Save</button>
+              <button onClick={()=>{saveRecipe(recipe._id)}} disabled={isRecipeSaved(recipe._id)}>{isRecipeSaved(recipe._id)?"Saved":"Save"}</button>
             </div>
             <div className="instructions">
               <p>{recipe.instructions}</p>
