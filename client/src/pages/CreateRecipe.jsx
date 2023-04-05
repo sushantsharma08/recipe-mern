@@ -2,11 +2,14 @@ import React,{useState} from 'react'
 import axios from "axios";
 import { useGetUserId } from '../hooks/useGetUserId';
 import {useNavigate} from "react-router-dom"
+import { useCookies } from "react-cookie"
 
 
 const CreateRecipe = () => {
 
   const userID = useGetUserId();
+  const [cookies,] = useCookies(["access_token"])
+
 
   const [recipe, setrecipe] = useState({
     name:"",
@@ -40,7 +43,11 @@ const CreateRecipe = () => {
   const onSubmit= async (event)=>{
     event.preventDefault();
     try {
-      await axios.post("https://recipe-mern-nine.vercel.app/recipes",recipe);
+      await axios.post("https://recipe-mern-nine.vercel.app/recipes",recipe,
+      // headers for token auth 
+      {headers:{authorization:cookies.access_token}
+    
+    });
       navigate("/");
       alert("recipe saved")
     } catch (error) {

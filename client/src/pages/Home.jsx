@@ -1,10 +1,15 @@
 import React,{useState,useEffect}from 'react'
 import axios from "axios"
 import { useGetUserId } from '../hooks/useGetUserId';
+import { useCookies } from "react-cookie" 
+
 
 const Home = () => {
   const [recipes, setrecipes] = useState([]);
   const [savedRecipes, setSavedRecipes] = useState([])
+  const [cookies,] = useCookies(["access_token"]) 
+
+
   const userId =useGetUserId();
 
   useEffect(() => {
@@ -27,7 +32,7 @@ const Home = () => {
       }
     }
     fetchRecipe();
-    fetchSavedRecipe()
+    if(cookies.access_token) fetchSavedRecipe()
   },[])
 
   const saveRecipe = async (recipeId)=>{
@@ -35,7 +40,7 @@ const Home = () => {
     const response =  await axios.put("https://recipe-mern-nine.vercel.app/recipes",
     {recipeId,userId},
     // headers for token auth 
-    {headers:{autherization:"wugdyuhegdfhghedf"}}
+    {headers:{authorization:cookies.access_token}}
     );
     setSavedRecipes(response.data.savedRecipes)
     console.log(response);
