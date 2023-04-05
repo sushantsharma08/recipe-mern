@@ -32,7 +32,11 @@ const Home = () => {
 
   const saveRecipe = async (recipeId)=>{
     try{
-    const response =  await axios.put("https://recipe-mern-nine.vercel.app/recipes",{recipeId,userId});
+    const response =  await axios.put("https://recipe-mern-nine.vercel.app/recipes",
+    {recipeId,userId},
+    // headers for token auth 
+    {headers:{autherization:"wugdyuhegdfhghedf"}}
+    );
     setSavedRecipes(response.data.savedRecipes)
     console.log(response);
     } catch (error) {
