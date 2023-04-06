@@ -1,12 +1,12 @@
 # recipe-mern
 1st mern stack project
 [Have a look!](https://recipe-mern-vrkv.vercel.app/)
----
 
-##Description
+
+## Description
 Welcome to this project! Thisis my first Mern Stack Project. This allows users to <b> Watch, Create and Save </b> Food Recipes.
 
-##Tools, Libraries and Frameworks used in 
+## Tools, Libraries and Frameworks used in 
 
 <b>Frontend</b> :
 1.Vite
