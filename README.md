@@ -9,11 +9,11 @@ Welcome to this project! Thisis my first Mern Stack Project. This allows users t
 ## Tools, Libraries and Frameworks used in 
 
 <b>Frontend</b> :
-1.Vite
-2.@tanstack/react-query
-3.axios
-4.react-cookie
-5.react-router-dom
+1. Vite
+2. @tanstack/react-query
+3. axios
+4. react-cookie
+5. react-router-dom
 
 <b>Backend</b> :
 1. bcryptjs
