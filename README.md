@@ -1,6 +1,6 @@
 # recipe-mern
 1st mern stack project
-![Have a look!](https://recipe-mern-vrkv.vercel.app/)
+[Have a look!](https://recipe-mern-vrkv.vercel.app/)
 ---
 
 ##Description
