@@ -4,17 +4,19 @@ import mongoose from 'mongoose';
 // import { UserModel } from "./models/Users";
 import {UserRouter} from './src/routes/users.js'
 import {recipesRouter} from './src/routes/recipes.js'
+import * as dotenv from "dotenv";
+
 
 const app = express();
+dotenv.config({path:"./config.env"});
 
 app.use(express.json());
 app.use(cors());
-// app.use("/",(req,res)=>{
-//     res.json({message:"hello"})
-// })
+
 app.use("/auth",UserRouter)
 app.use("/recipes",recipesRouter)
+const port = process.env.PORT
 
-mongoose.connect("mongodb+srv://sushantsharmadev:Qwerty123@recipe.6i7hjnb.mongodb.net/recipe?retryWrites=true&w=majority")
+mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@recipe.6i7hjnb.mongodb.net/recipe?retryWrites=true&w=majority`)
 
-app.listen(3001,()=>{console.log('server is up');})
+app.listen(port,()=>{console.log("Server up!!!");})
