@@ -11,7 +11,7 @@ const app = express();
 dotenv.config({path:"./config.env"});
 
 app.use(express.json());
-app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
+// app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(cors({
     origin: '*'
 }));
