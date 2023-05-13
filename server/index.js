@@ -11,7 +11,9 @@ const app = express();
 dotenv.config({path:"./config.env"});
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: ['https://en.wikipedia.org/wiki/Gulab_jamun#/media/File:Gulab_jamun_(Gibraltar,_November_2020).jpg']
+}));
 
 app.use("/auth",UserRouter)
 app.use("/recipes",recipesRouter)
