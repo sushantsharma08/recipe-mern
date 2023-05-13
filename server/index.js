@@ -14,7 +14,7 @@ app.use(express.json());
 // app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(cors({
     origin: '*'
-}));                                  
+}));
 
 app.use("/auth",UserRouter)
 app.use("/recipes",recipesRouter)
